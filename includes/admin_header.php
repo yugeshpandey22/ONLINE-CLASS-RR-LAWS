@@ -261,10 +261,9 @@ include_once __DIR__ . '/db.php';
 <div class="wrapper">
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-brand">
-            <div class="logo-icon"><i class="bi bi-shield-lock"></i></div>
-            <span>RR LAWS</span>
-        </div>
+        <a href="index.php" class="sidebar-brand text-decoration-none" style="padding: 20px;">
+            <img src="../assets/images/logo2.png" alt="Concept Wallah Logo" style="height: 80px; width: auto; object-fit: contain;">
+        </a>
         <div class="sidebar-nav">
             <ul>
                 <li>
@@ -323,6 +322,13 @@ include_once __DIR__ . '/db.php';
                 <li>
                     <a href="manage_enrollments.php" class="d-flex justify-content-between align-items-center <?php echo basename($_SERVER['PHP_SELF']) == 'manage_enrollments.php' ? 'active' : ''; ?>">
                         <span><i class="bi bi-person-check"></i> Enrollments</span>
+                    </a>
+                </li>
+
+                <!-- Results section -->
+                <li>
+                    <a href="manage_results.php" class="d-flex justify-content-between align-items-center <?php echo in_array(basename($_SERVER['PHP_SELF']), ['manage_results.php', 'add_result.php']) ? 'active' : ''; ?>">
+                        <span><i class="bi bi-trophy"></i> Student Results</span>
                     </a>
                 </li>
 

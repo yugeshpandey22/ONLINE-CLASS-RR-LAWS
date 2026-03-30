@@ -13,8 +13,8 @@
 <body>
     <header class="navbar">
         <div class="container nav-container">
-            <a href="index.php" class="logo" style="display: flex; align-items: center;">
-                <img src="../assets/images/logo.png" alt="Concept Wallah Logo" style="height: 55px; border-radius: 8px;">
+            <a href="index.php" class="logo" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="../assets/images/logo2.png" alt="Concept Wallah Logo" style="height: 110px; width: auto; object-fit: contain;">
             </a>
             <nav class="nav-elements">
                 <ul class="nav-menu" id="navMenu">
@@ -23,8 +23,10 @@
                     <li><a href="blog.php">Blog</a></li>
                     <li><a href="lectures.php">Lectures</a></li>
                     <li><a href="courses.php">Courses</a></li>
+                    <li><a href="results.php">Our Results</a></li>
                     <li><a href="pdf_notes.php">PDF Notes</a></li>
-                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="login.php" style="color: var(--primary); font-weight: 850;">Login</a></li>
+                    <li><a href="signup.php" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem; color: #fff !important;">Sign Up</a></li>
                 </ul>
             </nav>
             <div class="mobile-toggle" id="mobileToggle">

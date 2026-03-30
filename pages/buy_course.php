@@ -65,30 +65,35 @@ if (isset($_POST['submit_payment'])) {
                     <?php echo $msg; ?>
                     
                     <div style="text-align: center; margin-bottom: 40px;">
-                        <p style="font-weight: 700; color: var(--dark-bg); margin-bottom: 20px;">1. Scan the QR Code to Pay</p>
-                        <!-- QR Code Placeholder -->
-                        <div style="background: #f1f5f9; width: 100%; height: 260px; border-radius: 20px; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--border);">
-                           <div style="text-align:center;">
-                                <i class="fas fa-qrcode" style="font-size: 4rem; color: var(--border);"></i>
-                                <p style="font-size: 0.85rem; color: #94A3B8; margin-top: 15px;">QR Code Image Pending<br>Add via Assets/Images</p>
-                           </div>
+                        <p style="font-weight: 700; color: var(--dark-bg); margin-bottom: 20px;">1. Pay via UPI &middot; Scan QR</p>
+                        
+                        <div class="qr-container" style="background: #fff; width: 100%; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border); margin-bottom: 20px;">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=yugeshpandey22@okaxis%26pn=RR%20LAWS%26am=<?php echo $course['price']; ?>%26cu=INR" style="width: 250px; height: 250px; border-radius: 12px;">
+                            <div style="margin-top: 15px;">
+                                <span style="background: #f1f5f9; padding: 8px 15px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">
+                                    UPI ID: <span style="color: var(--primary);">yugeshpandey22@okaxis</span>
+                                </span>
+                            </div>
                         </div>
-                        <p style="margin-top: 15px; font-weight: 700; font-size: 1.2rem; color: var(--primary);">Pay: ₹<?php echo number_format($course['price'], 2); ?></p>
+                        
+                        <p style="margin-top: 15px; font-weight: 800; font-size: 1.5rem; color: var(--dark-bg);">Amount: <span class="text-primary">₹<?php echo number_format($course['price'], 2); ?></span></p>
                     </div>
 
                     <form method="POST">
                         <div class="mb-4">
-                            <label class="form-label fw-bold small text-muted">2. Enter Transaction ID / UTR Number</label>
-                            <input type="text" name="txn_id" class="form-control form-control-lg border-2" required placeholder="e.g. 402941xxxxx" style="border-radius: 12px;">
-                            <small class="text-muted">Enter the unique ID from your Google Pay / PhonePe receipt.</small>
+                            <label class="form-label fw-bold small text-muted">2. Verify &middot; Transaction ID (UTR)</label>
+                            <input type="text" name="txn_id" class="form-control form-control-lg border-2" required placeholder="12 Digit UTR Number" style="border-radius: 12px; border-color: var(--primary);">
+                            <small class="text-muted">Submit the UTR/Reference number from your payment receipt.</small>
                         </div>
                         
-                        <button type="submit" name="submit_payment" class="btn btn-primary w-100 py-3 rounded-pill fw-bold" style="font-size: 1.1rem;">Submit Payment &middot; Request Access</button>
+                        <button type="submit" name="submit_payment" class="btn btn-primary w-100 py-3 rounded-pill fw-bold" style="font-size: 1.2rem; transform: translateY(0); transition: 0.3s; box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);">Submit Payment Verification &rarr;</button>
                     </form>
                     
-                    <p style="text-align: center; margin-top: 25px; font-size: 0.8rem; color: #94A3B8;">
-                        <i class="fas fa-shield-alt"></i> Manual Verification ensures 100% course security. Account is unlocked once ID is verified.
-                    </p>
+                    <div style="margin-top: 30px; padding: 20px; background: rgba(212, 175, 55, 0.05); border-radius: 15px; border-left: 5px solid var(--primary);">
+                        <p style="font-size: 0.85rem; color: #7c5d0a; margin: 0; font-weight: 600;">
+                            <i class="fas fa-info-circle"></i> Once submitted, our team will verify the payment within 2-4 hours and your course will be activated in your dashboard.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -16,10 +16,12 @@ try {
     $conn->set_charset("utf8mb4");
     
     // Ensure database exists
-    $conn->query("CREATE DATABASE IF NOT EXISTS `$dbname`");
+    $conn->query("CREATE DATABASE IF NOT EXISTS `$dbname` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
     $conn->select_db($dbname);
     
-    
+    // --- TABLES SETUP ---
+
+    // 1. Posts (Blogs & Lectures)
     $conn->query("
         CREATE TABLE IF NOT EXISTS posts (
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
@@ -31,26 +33,10 @@ try {
             pdf_path VARCHAR(255),
             course_id INT(11) DEFAULT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
+        ) ENGINE=InnoDB
     ");
     
-    // Soft alter: only add column if it doesn't exist (PHP 8.1+ throws on duplicate)
-    $col_check = $conn->query("SHOW COLUMNS FROM posts LIKE 'post_type'");
-    if ($col_check && $col_check->num_rows == 0) {
-        $conn->query("ALTER TABLE posts ADD COLUMN post_type VARCHAR(50) DEFAULT 'blog'");
-    }
-
-    $col_check_pdf = $conn->query("SHOW COLUMNS FROM posts LIKE 'pdf_path'");
-    if ($col_check_pdf && $col_check_pdf->num_rows == 0) {
-        $conn->query("ALTER TABLE posts ADD COLUMN pdf_path VARCHAR(255)");
-    }
-
-    $col_check_course = $conn->query("SHOW COLUMNS FROM posts LIKE 'course_id'");
-    if ($col_check_course && $col_check_course->num_rows == 0) {
-        $conn->query("ALTER TABLE posts ADD COLUMN course_id INT(11) DEFAULT NULL");
-    }
-    
-    
+    // 2. Courses
     $conn->query("
         CREATE TABLE IF NOT EXISTS courses (
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
@@ -60,20 +46,23 @@ try {
             image VARCHAR(255),
             active TINYINT(1) DEFAULT 1,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
+        ) ENGINE=InnoDB
     ");
 
+    // 3. System Users (Students)
     $conn->query("
         CREATE TABLE IF NOT EXISTS users (
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
+            registration_number VARCHAR(50) NOT NULL UNIQUE,
             name VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
             phone VARCHAR(20),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
+        ) ENGINE=InnoDB
     ");
 
+    // 4. Enrollments
     $conn->query("
         CREATE TABLE IF NOT EXISTS enrollments (
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
@@ -82,37 +71,45 @@ try {
             payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
             transaction_id VARCHAR(255),
             enrolled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users(id),
-            FOREIGN KEY (course_id) REFERENCES courses(id)
-        )
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB
     ");
     
+    // 5. Student Results (Achievement Showcase)
     $conn->query("
-        CREATE TABLE IF NOT EXISTS live_classes (
+        CREATE TABLE IF NOT EXISTS student_results (
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
-            title VARCHAR(255) NOT NULL,
-            meeting_url VARCHAR(555) NOT NULL,
-            scheduled_at DATETIME NOT NULL,
-            status ENUM('upcoming', 'live', 'ended') DEFAULT 'upcoming',
-            is_public TINYINT(1) DEFAULT 0,
+            student_name VARCHAR(255) NOT NULL,
+            exam_title VARCHAR(255) NOT NULL,
+            score VARCHAR(50) DEFAULT '100/100',
+            result_year VARCHAR(50),
+            image_path VARCHAR(255),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
+        ) ENGINE=InnoDB
     ");
 
-    $col_check_live = $conn->query("SHOW COLUMNS FROM live_classes LIKE 'is_public'");
-    if ($col_check_live && $col_check_live->num_rows == 0) {
-        $conn->query("ALTER TABLE live_classes ADD COLUMN is_public TINYINT(1) DEFAULT 0");
-    }
-
+    // 6. Admins
     $conn->query("
         CREATE TABLE IF NOT EXISTS admins (
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(50) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
+        ) ENGINE=InnoDB
     ");
 
+    // 7. Password Reset Tokens
+    $conn->query("
+        CREATE TABLE IF NOT EXISTS password_reset_tokens (
+            email VARCHAR(255) NOT NULL,
+            token VARCHAR(255) NOT NULL,
+            expires_at DATETIME NOT NULL,
+            PRIMARY KEY (email)
+        ) ENGINE=InnoDB
+    ");
+
+    // Default Admin Seeds
     $result = $conn->query('SELECT COUNT(*) as count FROM admins');
     $row = $result->fetch_assoc();
     if ($row['count'] == 0) {
@@ -122,7 +119,6 @@ try {
 
 } catch (Exception $e) {
     $conn = null;
-    // Uncomment below line only for local debugging:
-    // die("DB Error: " . $e->getMessage());
+    // Log or handle error quietly
 }
 ?>

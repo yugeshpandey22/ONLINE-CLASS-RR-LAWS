@@ -1,4 +1,7 @@
-<?php include '../includes/header.php'; ?>
+<?php 
+include '../includes/header.php'; 
+include '../includes/db.php';
+?>
 <?php 
 $msg = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -12,13 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $check->bind_param("s", $email);
         $check->execute();
         if ($check->get_result()->num_rows > 0) {
-            $msg = "<div class='alert alert-danger'>Email already registered! 🔒</div>";
+            $msg = "<div class='alert alert-danger font-weight-bold'>Email already registered! 🔒</div>";
         } else {
+            // Generate a unique registration number
+            $reg_num = "RR-" . date('Y') . "-" . rand(1000, 9999);
+            
             $hashed = password_hash($pass, PASSWORD_DEFAULT);
-            $stmt = $conn->prepare("INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $name, $email, $phone, $hashed);
+            $stmt = $conn->prepare("INSERT INTO users (registration_number, name, email, phone, password) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $reg_num, $name, $email, $phone, $hashed);
             if ($stmt->execute()) {
-                $msg = "<div class='alert alert-success'>Registration successful! Please login. 🔓</div>";
+                $msg = "<div class='alert alert-success font-weight-bold'>Registration successful! <br> Your R-Number is: <strong>$reg_num</strong> <br> Please login. 🔓</div>";
             }
         }
     }

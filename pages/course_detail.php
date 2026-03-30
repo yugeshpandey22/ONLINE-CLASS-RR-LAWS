@@ -13,9 +13,19 @@ if (!$course) {
     exit;
 }
 
-// Check enrollment (Placeholder - assuming no user login yet, will add later)
+// Check enrollment
 $is_enrolled = false; 
-// TODO: Check session and database for active enrollment
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION['user_id']) && $conn) {
+    $uid = $_SESSION['user_id'];
+    $check_enroll = $conn->query("SELECT id FROM enrollments WHERE user_id = $uid AND course_id = $course_id AND payment_status = 'completed'");
+    if ($check_enroll && $check_enroll->num_rows > 0) {
+        $is_enrolled = true;
+    }
+}
 ?>
 
 <main>
@@ -24,8 +34,14 @@ $is_enrolled = false;
             <span style="color: var(--primary); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">Premium Program</span>
             <h1 style="font-size: 4rem; line-height: 1.1; margin: 20px 0 30px; font-weight: 800; color: white;"><?php echo htmlspecialchars($course['title']); ?></h1>
             <div style="display: flex; align-items: center; gap: 30px; margin-top: 40px;">
-                <h2 style="font-size: 2.8rem; margin: 0; color: var(--primary);">₹<?php echo number_format($course['price'], 0); ?></h2>
-                <a href="buy_course.php?id=<?php echo $course_id; ?>" class="btn btn-primary" style="padding: 15px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);">Enroll Now &middot; Start Learning</a>
+                <h3 style="font-size: 2.8rem; margin: 0; color: var(--primary); font-weight: 850;">₹<?php echo number_format($course['price'], 0); ?></h3>
+                <?php if($is_enrolled): ?>
+                    <div style="padding: 15px 40px; border-radius: 50px; background: #E8F5E9; color: #1B5E20; display: flex; align-items: center; gap: 10px; font-weight: 850;">
+                        <i class="fas fa-check-circle"></i> YOU ARE ENROLLED
+                    </div>
+                <?php else: ?>
+                    <a href="buy_course.php?id=<?php echo $course_id; ?>" class="btn btn-primary" style="padding: 15px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; box-shadow: 0 15px 30px rgba(54, 75, 197, 0.3);">Enroll Now &middot; Start Learning</a>
+                <?php endif; ?>
             </div>
         </div>
     </section>

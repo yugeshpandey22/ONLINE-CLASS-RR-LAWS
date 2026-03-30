@@ -21,6 +21,51 @@ if(!$post) {
     include '../includes/footer.php';
     exit;
 }
+
+// --- PRIVACY PROTECTION (STUDENT ONLY) ---
+// If it's a lecture, or belongs to a course, check for PAID enrollment
+if ($post['post_type'] == 'lecture' || !empty($post['course_id'])) {
+    $cid = $post['course_id'];
+    $is_authorized = false;
+
+    if (isset($_SESSION['user_id'])) {
+        $uid = $_SESSION['user_id'];
+        
+        // If course_id is null/empty but it's a lecture, we might need a general check or specific course check
+        if (!empty($cid)) {
+            $check = $conn->query("SELECT id FROM enrollments WHERE user_id = $uid AND course_id = $cid AND payment_status = 'completed'");
+            if ($check && $check->num_rows > 0) {
+                $is_authorized = true;
+            }
+        } else {
+            // General lecture check if no course_id linked (Security fallback)
+            $is_authorized = true; 
+        }
+    }
+
+    if (!$is_authorized) {
+?>
+<main style="background: var(--bg-light); min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 100px 20px;">
+    <div class="container" style="max-width: 600px; text-align: center; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 40px 90px rgba(0,0,0,0.08); border: 1px solid var(--border);">
+        <div style="font-size: 4rem; margin-bottom: 30px;">🔐</div>
+        <h2 style="font-size: 2.22rem; font-weight: 850; color: #000; margin-bottom: 20px;">Premium Content Locked</h2>
+        <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 40px;">This lecture is part of a premium program at <strong>Integrated Classes Sasaram</strong>. Please login and ensure your course payment is completed to access this module.</p>
+        
+        <div style="display: grid; gap: 15px;">
+            <?php if(!isset($_SESSION['user_id'])): ?>
+                <a href="login.php" class="btn btn-primary" style="padding: 18px; border-radius: 50px; font-weight: 800; font-size: 1.1rem;">Login to Your Account</a>
+            <?php else: ?>
+                <a href="courses.php" class="btn btn-primary" style="padding: 18px; border-radius: 50px; font-weight: 800; font-size: 1.1rem;">Browse Premium Courses</a>
+            <?php endif; ?>
+            <a href="index.php" class="btn btn-outline" style="padding: 12px; font-size: 0.9rem; font-weight: 700; color: #94A3B8 !important; border:none;">Return to Homepage</a>
+        </div>
+    </div>
+</main>
+<?php
+        include '../includes/footer.php';
+        exit;
+    }
+}
 ?>
 
 <main>

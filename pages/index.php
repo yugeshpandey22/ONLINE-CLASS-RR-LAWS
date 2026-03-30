@@ -4,27 +4,27 @@ include '../includes/db.php';
 ?>
 
 <main>
-    <!-- Ultra Premium Hero Section -->
-    <section class="hero position-relative" style="background: var(--dark-bg); overflow: hidden; padding: 180px 0 150px;">
+    <!-- Ultra Premium Hero Section (Apna College Style) -->
+    <section class="hero position-relative" style="background: #ffffff; overflow: hidden; padding: 120px 0 150px;">
         <!-- Animated Background Elements -->
         <div class="blob-cont">
-            <div class="yellow-blob"></div>
-            <div class="blue-blob"></div>
+            <div class="yellow-blob" style="background: var(--accent); opacity: 0.1;"></div>
+            <div class="blue-blob" style="background: var(--primary); opacity: 0.1;"></div>
         </div>
         
         <div class="container hero-content position-relative z-10" style="text-align: center; max-width: 950px; margin: 0 auto; z-index: 10;">
-            <div class="badge-glass" style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 25px; border-radius: 50px; font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); color: var(--primary); animation: slideDown 0.8s ease-out;">
-                <span style="display:block; width:8px; height:8px; background:var(--primary); border-radius:50%; box-shadow: 0 0 10px var(--primary);"></span> Concept Wallah & Associates
+            <div class="badge-glass" style="display: inline-flex; align-items: center; gap: 15px; padding: 14px 40px; border-radius: 50px; font-size: 1.25rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 40px; border: 2px solid #FFA511; background: #FFF9E6; color: #000; animation: slideDown 0.8s ease-out; box-shadow: 0 10px 20px rgba(255, 165, 17, 0.1);">
+                <span style="display:block; width:12px; height:12px; background:#FFA511; border-radius:50%; box-shadow: 0 0 15px #FFA511;"></span> Integrated Classes Sasaram
             </div>
-            <h1 class="hero-title" style="font-size: 5rem; line-height: 1.1; margin-bottom: 25px; font-weight: 800; color: white; animation: slideUp 1s ease-out;">
-                Master the Law.<br><span class="text-gradient">Secure Your Future.</span>
+            <h1 class="hero-title" style="font-size: 4.5rem; line-height: 1.1; margin-bottom: 25px; font-weight: 850; color: #000; animation: slideUp 1s ease-out;">
+                Learn & become the<br><span style="color: #364BC5;">Top 1% Ranker.</span>
             </h1>
-            <p style="font-size: 1.35rem; color: #94A3B8; margin-bottom: 45px; font-weight: 300; max-width: 800px; margin-inline: auto; animation: fadeIn 1.2s ease-out;">
-                Elite academic mentorship and aggressive legal advocacy. We bridge the gap between complex theoretical concepts and real-world courtroom triumphs.
+            <p style="font-size: 1.35rem; color: #4B5563; margin-bottom: 45px; font-weight: 500; max-width: 800px; margin-inline: auto; animation: fadeIn 1.2s ease-out;">
+                Elite academic mentorship for Math & Specialized Subjects. Our results speak louder: <span style="color: var(--primary); font-weight: 800;">Students score 100/100 in Mathematics!</span> Master the concept with Integrated Classes.
             </p>
-            <div class="hero-buttons" style="animation: fadeIn 1.5s ease-out;">
-                <a href="courses.php" class="btn btn-primary glow-button" style="padding: 18px 45px; font-size: 1.15rem; border-radius: 50px;">Join Academy <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
-                <a href="about.php" class="btn btn-outline" style="padding: 18px 45px; font-size: 1.15rem; border-radius: 50px; border: 2px solid rgba(255,255,255,0.7); display: flex; align-items: center; gap: 8px;"><i class="fas fa-play-circle"></i> Explore Methodology</a>
+            <div class="hero-buttons" style="animation: fadeIn 1.5s ease-out; display: flex; gap: 20px; justify-content: center;">
+                <a href="courses.php" class="btn btn-primary glow-button" style="padding: 18px 45px; font-size: 1.15rem; border-radius: 50px; background: var(--primary); border: none;">Explore Courses <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+                <a href="about.php" class="btn" style="padding: 18px 45px; font-size: 1.15rem; border-radius: 50px; border: 2px solid var(--primary); color: var(--primary); display: flex; align-items: center; gap: 8px;"><i class="fas fa-play-circle"></i> View Methodology</a>
             </div>
         </div>
     </section>
@@ -76,17 +76,17 @@ include '../includes/db.php';
         </div>
     </section>
 
-    <!-- Latest Insights Section -->
-    <section class="position-relative" style="background: var(--dark-bg); padding: 120px 0; overflow: hidden; margin-top: -100px; padding-top: 180px;">
-        <div style="position: absolute; top: 10%; right: -5%; width: 400px; height: 400px; background: rgba(212, 175, 55, 0.1); border-radius: 50%; filter: blur(80px); z-index: 0; pointer-events: none;"></div>
-        <div style="position: absolute; bottom: -5%; left: -5%; width: 500px; height: 500px; background: rgba(59, 130, 246, 0.1); border-radius: 50%; filter: blur(100px); z-index: 0; pointer-events: none;"></div>
+    <!-- Latest Insights Section (Light Theme) -->
+    <section class="position-relative" style="background: var(--light-bg); padding: 120px 0; overflow: hidden; margin-top: 0; border-top: 1px solid var(--border);">
+        <div style="position: absolute; top: 10%; right: -5%; width: 400px; height: 400px; background: rgba(59, 73, 207, 0.05); border-radius: 50%; filter: blur(80px); z-index: 0; pointer-events: none;"></div>
+        <div style="position: absolute; bottom: -5%; left: -5%; width: 500px; height: 500px; background: rgba(245, 158, 11, 0.05); border-radius: 50%; filter: blur(100px); z-index: 0; pointer-events: none;"></div>
 
         <div class="container position-relative" style="z-index: 10;">
             <div class="section-title" style="text-align: center; margin-bottom: 70px; display: flex; flex-direction: column; align-items: center; border: none; padding-bottom: 0;">
-                <div class="badge-glass" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid rgba(212, 175, 55, 0.3); background: rgba(255, 255, 255, 0.05); color: var(--primary);">
+                <div class="badge-glass" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; border: 1px solid var(--primary); background: rgba(59, 73, 207, 0.05); color: var(--primary);">
                     Knowledge Repository
                 </div>
-                <h2 style="color: white; font-size: 3rem; margin-bottom: 20px; font-weight: 800;">Latest Insights & Lectures</h2>
+                <h2 style="color: var(--text-main); font-size: 3rem; margin-bottom: 20px; font-weight: 800;">Latest Insights & Lectures</h2>
             </div>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 40px;">
@@ -108,50 +108,49 @@ include '../includes/db.php';
                         $img_src = !empty($post['image']) ? '../' . $post['image'] : '../assets/images/post1.png';
                         $date = date('M d, Y', strtotime($post['created_at']));
                 ?>
-                 <article class="blog-card glass-panel" style="background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; position: relative; transition: all 0.4s ease; transform-style: preserve-3d; color: white;">
-                    <div class="card-glow" style="background: rgba(255,255,255,0.05);"></div>
+                 <article class="blog-card glass-panel" style="background: #ffffff !important; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; position: relative; transition: all 0.4s ease; box-shadow: var(--shadow-md); color: var(--text-main);">
+                    <div class="card-glow" style="background: rgba(59, 73, 207, 0.02);"></div>
                     <div style="height: 240px; overflow: hidden; position: relative;">
                         <a href="single.php?id=<?php echo $post['id']; ?>" style="display: block; width: 100%; height: 100%;">
                             <img src="<?php echo htmlspecialchars($img_src); ?>" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);">
                         </a>
-                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 50%, rgba(10,15,30,0.9)); pointer-events: none;"></div>
                         <?php if($post['post_type'] == 'lecture'): ?>
-                            <span class="badge" style="position: absolute; top:20px; right:20px; padding: 6px 15px; border-radius: 50px; background: rgba(239, 68, 68, 0.9); border: 1px solid #ef4444; color: white; display:flex; align-items:center; gap:6px; font-size: 0.8rem; letter-spacing: 1px;"><i class="fas fa-play-circle"></i> Video Lecture</span>
+                            <span class="badge" style="position: absolute; top:20px; right:20px; padding: 6px 15px; border-radius: 50px; background: var(--primary); border: none; color: white; display:flex; align-items:center; gap:6px; font-size: 0.8rem; letter-spacing: 1px;"><i class="fas fa-play-circle"></i> Video Lecture</span>
                         <?php endif; ?>
                     </div>
                     
                     <div style="padding: 35px 30px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                             <?php if($post['post_type'] == 'lecture'): ?>
-                                <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;"><i class="fas fa-play-circle me-1"></i> Full Session</span>
+                                <span style="background: rgba(59, 73, 207, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;"><i class="fas fa-play-circle me-1"></i> Full Session</span>
                             <?php else: ?>
-                                <span style="background: rgba(59, 130, 246, 0.15); color: #3b82f6; padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;"><i class="fas fa-video me-1"></i> Quick Clip</span>
+                                <span style="background: rgba(245, 158, 11, 0.1); color: var(--accent); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;"><i class="fas fa-video me-1"></i> Quick Clip</span>
                             <?php endif; ?>
-                            <span style="color: rgba(255,255,255,0.5); font-size: 0.85rem;"><i class="far fa-calendar-alt me-1"></i> <?php echo $date; ?></span>
+                            <span style="color: var(--text-muted); font-size: 0.85rem;"><i class="far fa-calendar-alt me-1"></i> <?php echo $date; ?></span>
                         </div>
                         
                         <h3 style="font-size: 1.5rem; margin-bottom: 20px; line-height: 1.4; font-weight: 700;">
-                            <a href="single.php?id=<?php echo $post['id']; ?>" class="hover-primary" style="color: white; text-decoration: none; transition: 0.3s;"><?php echo htmlspecialchars($post['title']); ?></a>
+                            <a href="single.php?id=<?php echo $post['id']; ?>" class="hover-primary" style="color: var(--text-main); text-decoration: none; transition: 0.3s;"><?php echo htmlspecialchars($post['title']); ?></a>
                         </h3>
                         
-                        <p style="color: rgba(255,255,255,0.6); margin-bottom: 25px; line-height: 1.7; font-size: 1.05rem;">
+                        <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.7; font-size: 1.05rem;">
                             <?php echo substr(htmlspecialchars(strip_tags($post['content'])), 0, 100); ?>...
                         </p>
                         
-                        <a href="single.php?id=<?php echo $post['id']; ?>" style="color: var(--primary); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;" onmouseover="this.style.gap='12px'" onmouseout="this.style.gap='8px'">Study Material <i class="fas fa-arrow-right"></i></a>
+                        <a href="single.php?id=<?php echo $post['id']; ?>" style="color: var(--primary); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;" onmouseover="this.style.gap='12px'" onmouseout="this.style.gap='8px'">Study Material <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
                 <?php 
                     endforeach;
                 else:
                 ?>
-                    <p style="color: rgba(255,255,255,0.5); font-size: 1.1rem; text-align: center; grid-column: 1 / -1; padding: 40px; border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px;">The knowledge repository is currently being updated. Fresh lectures and insights will be posted soon.</p>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; text-align: center; grid-column: 1 / -1; padding: 40px; border: 1px dashed var(--border); border-radius: 12px;">The knowledge repository is currently being updated. Fresh lectures and insights will be posted soon.</p>
                 <?php endif; ?>
             </div>
             
             <div style="text-align: center; margin-top: 60px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <a href="blog.php" class="btn btn-primary glow-button" style="padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; font-weight: 600;">Latest Blogs <i class="fas fa-file-text ms-2"></i></a>
-                <a href="lectures.php" class="btn btn-outline" style="padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; font-weight: 600; color: white; border: 2px solid rgba(255,255,255,0.3);">Video Lectures <i class="fas fa-play-circle ms-2"></i></a>
+                <a href="blog.php" class="btn btn-primary glow-button" style="padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; font-weight: 600; background: var(--primary); border: none;">Latest Blogs <i class="fas fa-file-text ms-2"></i></a>
+                <a href="lectures.php" class="btn" style="padding: 16px 45px; font-size: 1.1rem; border-radius: 50px; font-weight: 600; color: var(--primary); border: 2px solid var(--primary);">Video Lectures <i class="fas fa-play-circle ms-2"></i></a>
             </div>
         </div>
     </section>

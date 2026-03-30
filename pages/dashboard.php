@@ -1,4 +1,5 @@
 <?php include '../includes/header.php'; ?>
+<?php include '../includes/db.php'; ?>
 <?php 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -10,6 +11,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['user_name'];
+
+// Fetch latest user details (for R-Number)
+$user_q = $conn->query("SELECT registration_number FROM users WHERE id = $user_id");
+$user_data = $user_q->fetch_assoc();
+$reg_number = $user_data['registration_number'] ?? "RR-TEMP-" . $user_id;
+
 ?>
 
 <main style="background: var(--light-bg); padding: 120px 0 100px;">
@@ -50,6 +57,7 @@ $user_name = $_SESSION['user_name'];
             <a href="<?php echo $row['meeting_url']; ?>" target="_blank" class="btn btn-white" style="background: white; color: #ef4444 !important; font-weight: 800; padding: 12px 30px; border-radius: 50px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">JOIN LIVE SESSION &rarr;</a>
         </div>
         <?php endif; ?>
+        <?php endif; ?>
 
         <div style="display: grid; grid-template-columns: 1fr 3fr; gap: 60px;">
             <!-- Left: Sidebar -->
@@ -60,7 +68,10 @@ $user_name = $_SESSION['user_name'];
                             <?php echo strtoupper(substr($user_name, 0, 1)); ?>
                         </div>
                         <h4 style="margin: 0; font-weight: 800;"><?php echo htmlspecialchars($user_name); ?></h4>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Member ID: #S-<?php echo $user_id; ?></p>
+                        <div style="margin-top: 10px;">
+                            <span class="badge bg-primary text-white p-2 rounded-lg" style="letter-spacing: 1px; font-weight: 700;">R-Number: <?php echo $reg_number; ?></span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 15px;">Student Portal Member</p>
                     </div>
                 </div>
             </div>
@@ -77,8 +88,8 @@ $user_name = $_SESSION['user_name'];
                         WHERE e.user_id = $user_id
                         ORDER BY e.enrolled_at DESC
                     ");
-                    if ($enrolls && $enrolls->num_rows > 0):
-                        while($course = $enrolls->fetch_assoc()):
+                    if ($enrolls && $enrolls->num_rows > 0) {
+                        while($course = $enrolls->fetch_assoc()) {
                     ?>
                     <div class="glass-panel" style="background: white; border-radius: 24px; padding: 25px; border: 1px solid var(--border); transition: 0.4s;">
                         <img src="../<?php echo !empty($course['image']) ? $course['image'] : 'assets/images/hero.png'; ?>" style="width: 100%; height: 160px; object-fit: cover; border-radius: 16px; margin-bottom: 20px;">
@@ -96,12 +107,15 @@ $user_name = $_SESSION['user_name'];
                             </div>
                         <?php endif; ?>
                     </div>
-                    <?php endwhile; else: ?>
+                    <?php 
+                        } 
+                    } else { 
+                    ?>
                         <div style="grid-column: 1/-1; text-align: center; padding: 60px;">
                             <h3 class="text-muted">No premium courses yet. Start your journey!</h3>
                             <a href="courses.php" class="btn btn-primary mt-3 btn-lg rounded-pill px-5">Browse Courses</a>
                         </div>
-                    <?php endif; ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -109,3 +123,6 @@ $user_name = $_SESSION['user_name'];
 </main>
 
 <?php include '../includes/footer.php'; ?>
+
+
+

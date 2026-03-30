@@ -41,7 +41,7 @@ if (isset($_GET['delete'])) {
                 <tbody>
                     <?php
                     $res = $conn->query("
-                        SELECT e.*, u.name as user_name, u.email as user_email, c.title as course_title 
+                        SELECT e.*, u.name as user_name, u.email as user_email, u.registration_number, c.title as course_title 
                         FROM enrollments e 
                         JOIN users u ON e.user_id = u.id 
                         JOIN courses c ON e.course_id = c.id 
@@ -53,6 +53,7 @@ if (isset($_GET['delete'])) {
                     <tr>
                         <td class="ps-4">
                             <div class="fw-bold text-dark"><?php echo htmlspecialchars($row['user_name']); ?></div>
+                            <small class="badge bg-light text-primary border rounded-pill px-2 py-0" style="font-size: 0.7rem;">R: <?php echo $row['registration_number'] ?: 'N/A'; ?></small><br>
                             <small class="text-muted"><?php echo htmlspecialchars($row['user_email']); ?></small>
                         </td>
                         <td><span class="fw-bold text-primary"><?php echo htmlspecialchars($row['course_title']); ?></span></td>
