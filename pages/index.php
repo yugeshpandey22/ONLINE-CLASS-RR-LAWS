@@ -14,19 +14,22 @@ include '../includes/db.php';
         
         <div class="container hero-content position-relative z-10" style="text-align: center; max-width: 950px; margin: 0 auto; z-index: 10;">
             <div class="badge-glass" style="display: inline-flex; align-items: center; gap: 15px; padding: 14px 40px; border-radius: 50px; font-size: 1.25rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 40px; border: 2px solid #FFA511; background: #FFF9E6; color: #000; animation: slideDown 0.8s ease-out; box-shadow: 0 10px 20px rgba(255, 165, 17, 0.1);">
-                <span style="display:block; width:12px; height:12px; background:#FFA511; border-radius:50%; box-shadow: 0 0 15px #FFA511;"></span> Integrated Classes Sasaram
-            </div>
-            <h1 class="hero-title" style="font-size: 4.5rem; line-height: 1.1; margin-bottom: 25px; font-weight: 850; color: #000; animation: slideUp 1s ease-out;">
-                Learn & become the<br><span style="color: #364BC5;">Top 1% Ranker.</span>
-            </h1>
-            <p style="font-size: 1.35rem; color: #4B5563; margin-bottom: 45px; font-weight: 500; max-width: 800px; margin-inline: auto; animation: fadeIn 1.2s ease-out;">
-                Elite academic mentorship for Math & Specialized Subjects. Our results speak louder: <span style="color: var(--primary); font-weight: 800;">Students score 100/100 in Mathematics!</span> Master the concept with Integrated Classes.
-            </p>
-            <div class="hero-buttons" style="animation: fadeIn 1.5s ease-out; display: flex; gap: 20px; justify-content: center;">
-                <a href="courses.php" class="btn btn-primary glow-button" style="padding: 18px 45px; font-size: 1.15rem; border-radius: 50px; background: var(--primary); border: none;">Explore Courses <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
-                <a href="about.php" class="btn" style="padding: 18px 45px; font-size: 1.15rem; border-radius: 50px; border: 2px solid var(--primary); color: var(--primary); display: flex; align-items: center; gap: 8px;"><i class="fas fa-play-circle"></i> View Methodology</a>
-            </div>
+        <div class="container hero-content" style="text-align: center; max-width: 950px; margin: 0 auto; z-index: 10;">
+        <div class="hero-badge reveal-text" style="display: flex; align-items: center; justify-content: center; gap: 15px; background: rgba(54, 75, 197, 0.08); border: 2px solid rgba(54, 75, 197, 0.15); padding: 12px 30px; border-radius: 100px; margin: 0 auto 35px; width: fit-content; box-shadow: 0 10px 30px rgba(54, 75, 197, 0.05);">
+            <span class="badge-dot"></span>
+            <p style="margin: 0; font-weight: 850; font-size: 1rem; color: var(--primary); letter-spacing: 1.5px; text-transform: uppercase;">Premier Educational Academy & Legal Firm</p>
         </div>
+        <h1 class="reveal-text" style="font-size: 5rem; line-height: 1.05; letter-spacing: -2.5px; font-weight: 900; color: var(--dark-bg); margin-bottom: 30px;">
+            Integrated Classes <br> <span class="text-gradient">Sasaram</span>
+        </h1>
+        <p class="reveal-text" style="font-size: 1.35rem; max-width: 850px; margin: 0 auto 50px; line-height: 1.65; color: var(--text-muted); font-weight: 500;">
+            Empowering the next generation with mathematical mastery and professional legal advocacy. Under the elite mentorship of <span style="color: #000; font-weight: 800;">Raushan Sir</span>, students consistently achieve <span class="highlight-math">100/100 in Mathematics</span> and excel in future leadership.
+        </p>
+        <div class="hero-btns reveal-text" style="display: flex; gap: 20px; justify-content: center; align-items: center;">
+            <a href="pages/courses.php" class="btn btn-primary btn-lg" style="padding: 20px 45px; border-radius: 50px; font-weight: 800; font-size: 1.15rem; box-shadow: 0 20px 40px rgba(54, 75, 197, 0.25);">Explore Premium Programs &rarr;</a>
+            <a href="pages/about.php" class="btn btn-outline btn-lg" style="padding: 20px 45px; border-radius: 50px; font-weight: 800; font-size: 1.15rem;">Our Mission</a>
+        </div>
+    </div>
     </section>
 
     <!-- Premium Three-Pillar Features -->

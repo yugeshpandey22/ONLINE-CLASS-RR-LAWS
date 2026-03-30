@@ -60,5 +60,52 @@
         </div>
     </footer>
     <script src="../assets/js/script.js"></script>
+
+<!-- GSAP Global Animations -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Hero Content Entrance
+        gsap.from(".hero-content .reveal-text", {
+            y: 100, 
+            opacity: 0, 
+            duration: 1.2, 
+            ease: "power4.out",
+            stagger: 0.2
+        });
+
+        // 2. Global Fade-In Elements
+        gsap.utils.toArray('.gsap-reveal').forEach((el) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+
+        // 3. Staggered Course/Blog Cards
+        gsap.utils.toArray('.gsap-stagger').forEach((container) => {
+            gsap.from(container.children, {
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top 80%"
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

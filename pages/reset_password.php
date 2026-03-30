@@ -19,18 +19,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_pass'])) {
     $new_pass = trim($_POST['new_pass']);
     $confirm_pass = trim($_POST['confirm_pass']);
     
-    if ($new_pass === $confirm_pass) {
-        $hashed = password_hash($new_pass, PASSWORD_DEFAULT);
-        
-        // Update user password and CLEAN token
-        $conn->query("UPDATE users SET password = '$hashed' WHERE email = '$email'");
-        $conn->query("DELETE FROM password_reset_tokens WHERE email = '$email'");
-        
-        // Redirect with Success
-        $msg = "<div class='alert alert-success' style='padding: 25px; border-radius: 20px; font-weight: 800; font-size: 1.15rem; margin-bottom: 40px;'>Password Successfully Reset! 🔓 <br> Please login with your new credentials.</div>";
-        $is_valid = false; // Hide form after success
+    // RE-VERIFY TOKEN before updating (Security fix)
+    $auth_check = $conn->query("SELECT * FROM password_reset_tokens WHERE email = '$email' AND token = '$token' AND expires_at > NOW()");
+    
+    if ($auth_check && $auth_check->num_rows > 0) {
+        if ($new_pass === $confirm_pass) {
+            $hashed = password_hash($new_pass, PASSWORD_DEFAULT);
+            
+            // Update user password and CLEAN token
+            $conn->query("UPDATE users SET password = '$hashed' WHERE email = '$email'");
+            $conn->query("DELETE FROM password_reset_tokens WHERE email = '$email'");
+            
+            // Redirect with Success
+            $msg = "<div class='alert alert-success' style='padding: 25px; border-radius: 20px; font-weight: 800; font-size: 1.15rem; margin-bottom: 40px;'>Password Successfully Reset! 🔓 <br> Please login with your new credentials.</div>";
+            $is_valid = false; // Hide form after success
+        } else {
+            $msg = "<div class='alert alert-danger' style='padding: 20px; border-radius: 12px; font-weight: 700; margin-bottom: 25px;'>Passwords do not match! ❌</div>";
+        }
     } else {
-        $msg = "<div class='alert alert-danger' style='padding: 20px; border-radius: 12px; font-weight: 700; margin-bottom: 25px;'>Passwords do not match! ❌</div>";
+        $msg = "<div class='alert alert-danger' style='padding: 20px; border-radius: 12px; font-weight: 700; margin-bottom: 25px;'>Security Error: Invalid or expired token. Request a new link. 🔒</div>";
+        $is_valid = false;
     }
 }
 ?>
